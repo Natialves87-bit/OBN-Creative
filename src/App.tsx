@@ -160,24 +160,31 @@ export default function App() {
 
   // Auto-scroll tracking for active tab highlighting
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      const sections = ["inicio", "concept-book", "servicos", "atuacao", "sobre", "faq", "contato"];
-      const scrollPosition = window.scrollY + 200;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const sections = ["inicio", "concept-book", "servicos", "atuacao", "sobre", "faq", "contato"];
+          const scrollPosition = window.scrollY + 200;
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const top = element.offsetTop;
-          const height = element.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveTab(`#${section}`);
-            break;
+          for (const section of sections) {
+            const element = document.getElementById(section);
+            if (element) {
+              const top = element.offsetTop;
+              const height = element.offsetHeight;
+              if (scrollPosition >= top && scrollPosition < top + height) {
+                setActiveTab(`#${section}`);
+                break;
+              }
+            }
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -597,6 +604,7 @@ export default function App() {
                     alt="Captação inovadora e criativa por nossa equipe"
                     className="w-full h-full object-cover grayscale hover:grayscale-0 contrast-[1.15] brightness-[0.9] hover:scale-102 transition-all duration-700 ease-out pointer-events-none"
                     referrerPolicy="no-referrer"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-[#1A1C1E] via-transparent to-transparent"></div>
 
@@ -713,6 +721,7 @@ export default function App() {
                       alt="A alma e a essência da nossa captação técnica e artística"
                       className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out pointer-events-none"
                       referrerPolicy="no-referrer"
+                      loading="lazy"
                     />
                   </div>
                   {/* Overlying dynamic card with Academic & Professional background detail */}
@@ -955,6 +964,7 @@ export default function App() {
                       <img 
                         src={item.imageUrl} 
                         alt={item.nome} 
+                        loading="lazy"
                         className={`w-full h-full ${item.imagePosition ? 'object-cover' : 'object-contain p-4'} brightness-95 group-hover:scale-[1.07] transition-transform duration-500 pointer-events-none`}
                         style={{
                           objectPosition: item.imagePosition || 'center',
@@ -1187,6 +1197,7 @@ export default function App() {
             <img
               src={contactImg}
               alt="Ação e estilo de vida"
+              loading="lazy"
               className="w-full h-full object-cover grayscale transition-all duration-1000 ease-out"
               referrerPolicy="no-referrer"
             />
