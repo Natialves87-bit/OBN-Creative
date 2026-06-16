@@ -1,0 +1,58 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# 1) Forçar HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# 2) Padronizar www (Redirecionar www para não-www)
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+</IfModule>
+
+# 3) Página 404 personalizada
+ErrorDocument 404 /index.html
+
+# 4) Compressão gzip/deflate para performance
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css application/json application/javascript application/x-javascript text/xml application/xml application/xml+rss text/javascript image/svg+xml
+</IfModule>
+
+# 5) Cache de Navegador (MUITO IMPORTANTE - REGRAS DE CACHE-BUSTING)
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Imagens e Mídias (jpg, png, webp, svg): 1 mês
+  ExpiresByType image/jpg "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/gif "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType video/mp4 "access plus 1 month"
+
+  # CSS e JS: 1 semana
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+  ExpiresByType application/x-javascript "access plus 1 week"
+  ExpiresByType text/javascript "access plus 1 week"
+</IfModule>
+
+<IfModule mod_headers.c>
+  # HTML: 0 segundos
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+
+  # CSS/JS: 1 semana
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "max-age=604800, public"
+  </FilesMatch>
+
+  # Imagens/Mídias: 1 mês
+  <FilesMatch "\.(jpg|jpeg|png|gif|swf|svg|webp|avif|mp4)$">
+    Header set Cache-Control "max-age=2592000, public"
+  </FilesMatch>
+</IfModule>

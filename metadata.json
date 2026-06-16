@@ -1,0 +1,6 @@
+{
+  "name": "Soul in Motion",
+  "description": "Produção audiovisual em Florianópolis com atuação global - Soluções completas de estratégia, captação audiovisual e marketing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
