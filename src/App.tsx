@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import aboutImg from "./assets/images/2ABE8A74-FD56-4FC3-834E-AEF02DDF71D7.JPG.jpeg";
 import contactImg from "./assets/images/IMG_8244.JPG.jpeg";
 import sedeImg from "./assets/images/D57AFEEF-53B9-4111-870F-182705C2BE65.JPG.jpeg";
@@ -34,7 +34,10 @@ import {
   Plus,
   Minus,
   Trash2,
-  ShoppingBag
+  ShoppingBag,
+  Volume2,
+  VolumeX,
+  Music
 } from "lucide-react";
 import { OBN_DATA, FAQItem, Service, Testimonial, CollectionItem } from "./data";
 
@@ -92,6 +95,21 @@ export default function App() {
   const [activeTab, setActiveTab] = useState("#inicio");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [faqOpenIndex, setFaqOpenIndex] = useState<number | null>(0);
+  
+  // Background Music
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  
+  const toggleAudio = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play().catch(err => console.error("Audio block:", err));
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
   
   // Interactive Cart for Clothing Goods & Merch (Products for Sale)
   const [cart, setCart] = useState<{ [key: string]: number }>({});
@@ -188,6 +206,34 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#0E0F11] text-[#F4F1EA] font-sans selection:bg-[#F4F1EA] selection:text-[#0E0F11] relative overflow-x-hidden">
       
+      {/* BACKGROUND MUSIC PLAYER */}
+      <audio 
+        ref={audioRef} 
+        src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" 
+        loop
+      />
+      <div className="fixed bottom-6 right-6 z-50">
+        <button
+          onClick={toggleAudio}
+          className={`flex items-center justify-center w-12 h-12 rounded-full shadow-2xl transition-all hover:scale-105 active:scale-95 border ${
+            isPlaying 
+              ? 'bg-[#F4F1EA] text-[#0E0F11] border-[#0E0F11]/10' 
+              : 'bg-[#1A1C1E] text-[#5E6064] border-[#F4F1EA]/10 hover:text-[#F4F1EA] hover:border-[#F4F1EA]/30'
+          }`}
+          title={isPlaying ? "Pausar trilha" : "Tocar trilha"}
+        >
+          {isPlaying ? (
+            <div className="flex items-end justify-center gap-0.5 h-4 w-4">
+              <span className="w-1 h-3 bg-[#0E0F11] animate-bounce [animation-delay:-0.15s] rounded-none"></span>
+              <span className="w-1 h-full bg-[#0E0F11] animate-bounce [animation-delay:-0.3s] rounded-none"></span>
+              <span className="w-1 h-2 bg-[#0E0F11] animate-bounce rounded-none"></span>
+            </div>
+          ) : (
+             <Music className="w-5 h-5" />
+          )}
+        </button>
+      </div>
+
       {/* DYNAMIC HEADER */}
       <header className="fixed top-0 left-0 right-0 z-40 bg-[#0E0F11]/90 backdrop-blur-md border-b border-[#F4F1EA]/10 text-[#F4F1EA] transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
@@ -723,17 +769,8 @@ export default function App() {
                     </p>
                   </div>
                   
-                  <div className="border-t border-[#F4F1EA]/5 pt-4 mt-6 flex items-center justify-between text-xs">
+                  <div className="border-t border-[#F4F1EA]/5 pt-4 mt-6 flex items-center text-xs">
                     <span className="text-[9px] font-mono text-[#5E6064]">CASES ATIVOS</span>
-                    <a
-                      href={OBN_DATA.empresa.whatsappLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-mono text-[10px] uppercase font-bold text-[#F4F1EA] flex items-center gap-1 hover:underline"
-                    >
-                      <span>Ver Mídia</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </a>
                   </div>
                 </div>
               ))}
