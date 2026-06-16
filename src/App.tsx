@@ -94,12 +94,8 @@ export default function App() {
   const [faqOpenIndex, setFaqOpenIndex] = useState<number | null>(0);
   
   // Interactive Cart for Clothing Goods & Merch (Products for Sale)
-  const [cart, setCart] = useState<{ [key: string]: number }>({
-    camisetas: 0,
-    garrafinhas: 0,
-    bones: 0,
-    adesivos: 0
-  });
+  const [cart, setCart] = useState<{ [key: string]: number }>({});
+  const [selectedSizes, setSelectedSizes] = useState<{ [key: string]: string }>({});
 
   const updateCart = (id: string, delta: number) => {
     setCart(prev => ({
@@ -131,7 +127,8 @@ export default function App() {
       if (qty > 0) {
         const item = OBN_DATA.colecoes.itens.find(p => p.id === id);
         if (item) {
-          lines.push(`- ${qty}x ${item.nome} (R$ ${item.preco} cada)`);
+          const sizeStr = selectedSizes[id] ? ` (Tamanho: ${selectedSizes[id]})` : ``;
+          lines.push(`- ${qty}x ${item.nome}${sizeStr} (R$ ${item.preco} cada)`);
         }
       }
     });
@@ -499,26 +496,6 @@ export default function App() {
                       </p>
 
                       <div className="flex items-center gap-4">
-                        <button
-                          onClick={() => copyToClipboard(`${service.nome}: ${service.descricao}`, service.id)}
-                          className="text-[10px] font-mono uppercase text-[#5E6064] hover:text-[#F4F1EA] transition-colors flex items-center gap-1"
-                          title="Copiar texto explicativo"
-                        >
-                          {copiedStatus === service.id ? (
-                            <>
-                              <CheckCircle className="w-3.5 h-3.5 text-green-400" />
-                              <span className="text-green-400">Copiado!</span>
-                            </>
-                          ) : (
-                            <>
-                              <Copy className="w-3.5 h-3.5" />
-                              <span>Copiar Pitch</span>
-                            </>
-                          )}
-                        </button>
-                        
-                        <span className="text-[#5E6064] text-xs">|</span>
-
                         <a
                           href={OBN_DATA.empresa.whatsappLink}
                           target="_blank"
@@ -1009,9 +986,18 @@ export default function App() {
                           <span className="text-[9px] font-mono uppercase tracking-widest text-[#5E6064] block mb-2">Exemplares Disponíveis:</span>
                           <div className="flex flex-wrap gap-1.5">
                             {item.itens.map((piece, i) => (
-                              <span key={i} className="px-2 py-0.5 bg-[#0E0F11] border border-[#F4F1EA]/5 text-[9px] font-mono tracking-wider text-[#F4F1EA]/85 rounded">
+                              <button 
+                                key={i} 
+                                onClick={() => setSelectedSizes(prev => ({ ...prev, [item.id]: piece }))}
+                                className={`px-2 py-0.5 border text-[9px] font-mono tracking-wider transition-colors rounded ${
+                                  selectedSizes[item.id] === piece 
+                                    ? 'bg-green-500 text-black border-green-500 font-bold shadow-[0_0_8px_rgba(34,197,94,0.4)]' 
+                                    : 'bg-[#0E0F11] border-[#F4F1EA]/10 text-[#F4F1EA]/85 hover:border-[#F4F1EA]/30'
+                                }`}
+                                title={`Selecionar Tamanho ${piece}`}
+                              >
                                 {piece}
-                              </span>
+                              </button>
                             ))}
                           </div>
                         </div>
@@ -1071,9 +1057,10 @@ export default function App() {
                         {(Object.entries(cart) as [string, number][]).map(([id, qty]) => {
                           const item = OBN_DATA.colecoes.itens.find(p => p.id === id);
                           if (!item || qty === 0) return null;
+                          const sizeStr = selectedSizes[id] ? ` (${selectedSizes[id]})` : '';
                           return (
                             <span key={id} className="px-3 py-1 bg-green-950/30 border border-green-500/20 text-[10px] font-mono text-green-400 rounded">
-                              {qty}x {item.nome}
+                              {qty}x {item.nome}{sizeStr}
                             </span>
                           );
                         })}
