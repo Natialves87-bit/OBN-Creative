@@ -140,10 +140,6 @@ export default function App() {
     window.open(`https://wa.me/${OBN_DATA.empresa.whatsapp}?text=${message}`, "_blank");
   };
 
-  // Slide-out copywriter clipboard drawer state
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [copiedStatus, setCopiedStatus] = useState<string | null>(null);
-
   // Auto-scroll tracking for active tab highlighting
   useEffect(() => {
     const handleScroll = () => {
@@ -166,13 +162,6 @@ export default function App() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const copyToClipboard = (text: string, id: string) => {
-    navigator.clipboard.writeText(text).then(() => {
-      setCopiedStatus(id);
-      setTimeout(() => setCopiedStatus(null), 2000);
-    });
-  };
 
   const toggleFaq = (index: number) => {
     setFaqOpenIndex(faqOpenIndex === index ? null : index);
@@ -199,19 +188,6 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#0E0F11] text-[#F4F1EA] font-sans selection:bg-[#F4F1EA] selection:text-[#0E0F11] relative overflow-x-hidden">
       
-      {/* 4. ACTIVE COPYS/SEO OVERLAY ACTION BUTTON FOR SLIDEOUT */}
-      <div className="fixed bottom-6 right-6 z-40">
-        <button
-          id="btn-copiar-textos"
-          onClick={() => setDrawerOpen(true)}
-          className="flex items-center gap-2.5 px-5 py-3.5 bg-[#F4F1EA] hover:bg-white text-[#0E0F11] font-mono text-xs uppercase tracking-widest font-bold rounded-full shadow-2xl transition-all hover:scale-105 active:scale-95 group border border-[#0E0F11]/10"
-        >
-          <FileText className="w-4 h-4 text-[#0E0F11]" />
-          <span>Copiar Textos (SEO/CRO)</span>
-          <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-        </button>
-      </div>
-
       {/* DYNAMIC HEADER */}
       <header className="fixed top-0 left-0 right-0 z-40 bg-[#0E0F11]/90 backdrop-blur-md border-b border-[#F4F1EA]/10 text-[#F4F1EA] transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
@@ -1241,121 +1217,6 @@ export default function App() {
           </div>
         </div>
       </footer>
-
-      {/* 4. SLIDE-OUT COPYWRITING DRAWER FOR MARKETING COPY COPIES (CRO ACCESSIBILITY MANDATE) */}
-      {drawerOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex justify-end animate-fadeIn">
-          
-          {/* Backdrop Click Dismiss */}
-          <div className="absolute inset-0" onClick={() => setDrawerOpen(false)} />
-
-          {/* Drawer Element */}
-          <div className="relative w-full max-w-xl bg-[#0E0F11] text-[#F4F1EA] border-l border-[#F4F1EA]/15 h-full overflow-y-auto p-6 sm:p-8 flex flex-col justify-between shadow-2xl animate-slideLeft z-10 text-left">
-            
-            <div>
-              {/* Header */}
-              <div className="flex items-center justify-between border-b border-[#F4F1EA]/10 pb-4 mb-6">
-                <div className="flex items-center gap-2">
-                  <FileText className="w-5 h-5 text-white" />
-                  <h3 className="font-serif italic font-bold text-lg text-white">Central de Redação & SEO</h3>
-                </div>
-                <button
-                  onClick={() => setDrawerOpen(false)}
-                  className="p-1 text-[#F4F1EA]/80 hover:text-white transition-colors"
-                >
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
-
-              <p className="text-xs text-[#F4F1EA]/70 mb-6 font-light leading-relaxed font-sans">
-                Acesse abaixo os textos originais de alta conversão selecionados para cada seção do site. Clique nos botões para copiá-los de imediato para a sua área de transferência para publicações ou posts.
-              </p>
-
-              {/* Copy Sections */}
-              <div className="space-y-6">
-                
-                {/* 1. Hero Block */}
-                <div className="bg-[#1A1C1E] rounded p-4 border border-[#F4F1EA]/10">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] font-mono text-[#5E6064] font-extrabold uppercase">Copy principal: Hero / Slogan</span>
-                    <button
-                      onClick={() => copyToClipboard(`Título: ${OBN_DATA.hero.h1}\nSubtítulo: ${OBN_DATA.hero.subtitulo}`, "copy-hero")}
-                      className="text-[10px] uppercase font-mono text-[#F4F1EA] hover:underline flex items-center gap-1"
-                    >
-                      {copiedStatus === "copy-hero" ? "Copiado!" : "Copiar"}
-                    </button>
-                  </div>
-                  <p className="text-xs font-serif italic text-white mb-1">"{OBN_DATA.hero.h1}"</p>
-                  <p className="text-[11px] text-[#F4F1EA]/80 font-light font-sans">{OBN_DATA.hero.subtitulo}</p>
-                </div>
-
-                {/* 2. Merchandise Book */}
-                <div className="bg-[#1A1C1E] rounded p-4 border border-[#F4F1EA]/10">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] font-mono text-[#5E6064] font-extrabold uppercase">Estampas & Conceitos das Coleções</span>
-                    <button
-                      onClick={() => {
-                        const allPhrases = OBN_DATA.colecoes.itens.map(c => `${c.colecaoId}: ${c.frase}`).join("\n");
-                        copyToClipboard(allPhrases, "copy-merch");
-                      }}
-                      className="text-[10px] uppercase font-mono text-[#F4F1EA] hover:underline flex items-center gap-1"
-                    >
-                      {copiedStatus === "copy-merch" ? "Copiado!" : "Copiar Todas"}
-                    </button>
-                  </div>
-                  <div className="text-[11px] space-y-1.5 text-[#F4F1EA]/80 font-mono">
-                    {OBN_DATA.colecoes.itens.map(c => (
-                      <div key={c.id}>
-                        <span className="text-white font-bold">{c.colecaoId}:</span> {c.frase}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* 3. Atuação Sem Limites */}
-                <div className="bg-[#1A1C1E] rounded p-4 border border-[#F4F1EA]/10">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] font-mono text-[#5E6064] font-extrabold uppercase">Logística & Atendimento nacional</span>
-                    <button
-                      onClick={() => copyToClipboard(OBN_DATA.atuacao.paragrafo, "copy-atuacao")}
-                      className="text-[10px] uppercase font-mono text-[#F4F1EA] hover:underline flex items-center gap-1"
-                    >
-                      {copiedStatus === "copy-atuacao" ? "Copiado!" : "Copiar"}
-                    </button>
-                  </div>
-                  <p className="text-[11px] text-[#F4F1EA]/80 font-sans font-light leading-relaxed">
-                    {OBN_DATA.atuacao.paragrafo}
-                  </p>
-                </div>
-
-                {/* 4. Chamada de ação contato */}
-                <div className="bg-[#1A1C1E] rounded p-4 border border-[#F4F1EA]/10">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] font-mono text-[#5E6064] font-extrabold uppercase">Mensagem de Fechamento / Call-out</span>
-                    <button
-                      onClick={() => copyToClipboard(OBN_DATA.contato.chamada, "copy-contato")}
-                      className="text-[10px] uppercase font-mono text-[#F4F1EA] hover:underline flex items-center gap-1"
-                    >
-                      {copiedStatus === "copy-contato" ? "Copiado!" : "Copiar"}
-                    </button>
-                  </div>
-                  <p className="text-xs font-serif italic text-white">
-                    "{OBN_DATA.contato.chamada}"
-                  </p>
-                </div>
-
-              </div>
-            </div>
-
-            {/* Bottom Actions of Drawer */}
-            <div className="pt-6 border-t border-[#F4F1EA]/10 mt-8 text-center text-[10px] font-mono uppercase tracking-widest text-[#5E6064]">
-              <span>Soul in Motion • OBN Creative</span>
-            </div>
-
-          </div>
-        </div>
-      )}
-
     </div>
   );
 }
