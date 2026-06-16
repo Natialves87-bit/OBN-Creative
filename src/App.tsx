@@ -393,7 +393,7 @@ export default function App() {
             </span>
 
             {/* Headline H1 with beautiful serif elegant look */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif italic text-white font-medium max-w-3xl leading-snug tracking-wide mb-8">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif italic text-white font-medium max-w-3xl leading-snug tracking-wide mb-8 whitespace-pre-line">
               {OBN_DATA.hero.h1}
             </h1>
 
@@ -659,7 +659,7 @@ export default function App() {
                 </div>
                 <div>
                   <h4 className="text-sm font-serif italic font-medium text-white">Equipamentos Proprietários Integrados</h4>
-                  <p className="text-[11px] text-[#F4F1EA]/60 font-mono">Drones 4K, GoPro, Insta360, câmera aquática profissional, iluminação profissional, flash profissional e conjunto de variadas lentes associadas à câmeras mirrorless para captações impecáveis.</p>
+                  <p className="text-[11px] text-[#F4F1EA]/60 font-mono">Drones 4K, GoPro, Insta360, câmera aquática, dispositivos de iluminação e flash, além de um conjunto variado de lentes associadas a câmeras mirrorless para captações impecáveis.</p>
                 </div>
               </div>
               <a
@@ -935,7 +935,7 @@ export default function App() {
               <h2 className="text-3xl sm:text-4xl font-serif italic font-medium text-white mb-4">
                 {OBN_DATA.colecoes.titulo}
               </h2>
-              <p className="text-[#F4F1EA]/70 text-sm sm:text-base font-light leading-relaxed">
+              <p className="text-[#F4F1EA]/70 text-sm sm:text-base font-light leading-relaxed whitespace-pre-line">
                 {OBN_DATA.colecoes.subtitulo}
               </p>
               <div className="w-12 h-px bg-[#F4F1EA]/30 mx-auto mt-6"></div>

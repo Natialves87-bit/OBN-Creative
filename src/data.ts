@@ -105,7 +105,7 @@ export const OBN_DATA = {
 
   hero: {
     h1_pre: "AGÊNCIA CRIATIVA · FLORIPA",
-    h1: "Conteúdo que move a sua marca.",
+    h1: "Conteúdo que move a\nsua marca.",
     subtitulo: "Direção criativa, foto, drone, montagem profissional e comunicação. A gente cuida da sua presença digital do começo ao fim com a sofisticação que seu posicionamento exige.",
     ctaPrincipal: "Conectar no WhatsApp",
     ctaSecundario: "Ver Coleção de Produtos",
@@ -125,8 +125,8 @@ export const OBN_DATA = {
     h2: "A Alma do Movimento nos Negócios",
     paragrafos: [
       "A Soul in Motion (assinada pela OBN Creative) nasceu no sul da ilha, em Florianópolis, da união entre a paixão por esportes de ação e a inteligência estratégica de canais de comunicação. Simplificamos sua presença online centralizando a produção premium de ponta a ponta.",
-      "Nosso DNA respira pura cultura Outdoor Sports Lifestyle. Traduzimos essa vivência visceral em vídeos comerciais de alto ritmo, fotografia analógica e digital de alta definição e montagem técnica extraordinária. A pós-produção é rigorosamente profissional, sob liderança de especialista formada em Comunicação, Publicidade e Marketing, com pós-graduação pelas principais instituições educacionais do país.",
-      "Nossa vivência no asfalto, na terra e no mar traduz-se em produções dinâmicas de alto padrão. Combinamos o olhar afiado para os esportes de ação e lifestyle outdoor à fineza exigida pelas marcas premium mais seletas do mercado. Contamos com um acervo técnico de excelência: drones homologados e lentes de alto desempenho para excelência em qualquer terreno."
+      "Nosso DNA respira pura cultura Outdoor Sports Lifestyle. Traduzimos essa vivência visceral em vídeos comerciais de alto ritmo, fotografia digital de alta definição e montagem técnica extraordinária. A pós-produção é rigorosamente profissional, sob liderança de especialista formada em Comunicação, Publicidade e Marketing, com pós-graduação pelas principais instituições educacionais do país.",
+      "Nossa vivência no concreto, na terra, no mar e na natureza traduz-se em produções dinâmicas de alto padrão. Combinamos o olhar afiado para os esportes de ação e lifestyle outdoor à fineza exigida pelas marcas premium mais seletas do mercado. Contamos com um acervo técnico de excelência: drones homologados e lentes de alto desempenho para excelência em qualquer terreno."
     ],
     cta: "Construir Minha Marca"
   },
@@ -176,7 +176,7 @@ export const OBN_DATA = {
 
   colecoes: {
     titulo: "Loja Virtual S.I.M. — Produtos & Vestuário",
-    subtitulo: "Nossos produtos conceituais exclusivos inspirados no autêntico Outdoor Sports Lifestyle. Vista e explore a alma do Soul in Motion com peças premium.",
+    subtitulo: "Nossos produtos conceituais exclusivos inspirados no autêntico Outdoor Sports Lifestyle.\nVista e explore a alma do Soul in Motion com peças premium.",
     itens: [
       {
         id: "prod1",
@@ -260,15 +260,15 @@ export const OBN_DATA = {
   },
 
   beneficios: {
-    h2: "Direção Avançada & Entrega Perfeita",
+    h2: "Direção Avançada & Execução Estratégica",
     itens: [
       {
         titulo: "Planejamento e Publicidade Sólidos",
-        descricao: "Especialista graduada e pós-graduada lidera a sua comunicação visual. Sem achismos: design, roteiro e comunicação fundamentados de verdade."
+        descricao: "Comunicação visual liderada por especialista com sólida formação acadêmica. Estratégias de design, roteiro e posicionamento criadas com fundamentação mercadológica para garantir resultados consistentes."
       },
       {
         titulo: "DNA Próprio Outdoor Sports Lifestyle",
-        descricao: "Não fazemos simulação de estúdio rasa. Skates de fluxo, asfalto, montanhas e contato natural são nossas vivências cotidianas."
+        descricao: "Skates de fluxo, concreto, montanhas e contato natural são nossas vivências cotidianas."
       },
       {
         titulo: "Ação Real & Esportiva",
