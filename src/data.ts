@@ -63,9 +63,10 @@ export const OBN_DATA = {
     cidade: "Florianópolis",
     estado: "SC",
     pais: "BR",
-    telefone: "(11) 99447-5111",
-    whatsapp: "5511994475111",
-    whatsappLink: "https://wa.me/5511994475111?text=Ol%C3%A1!%20Vim%20atrav%C3%A9s%20do%20site%20Soul%20in%20Motion%20e%20gostaria%20de%20conversar%20sobre%20nossos%20conte%C3%BAdos%20e%20audiovisual.",
+    telefone: "(11) 95648-1513",
+    whatsapp: "5511956481513",
+    whatsappLink: "https://wa.me/5511956481513?text=Ol%C3%A1!%20Vim%20atrav%C3%A9s%20do%20site%20Soul%20in%20Motion%20e%20gostaria%20de%20conversar%20sobre%20nossos%20conte%C3%BAdos%20e%20audiovisual.",
+    email: "hello@obncreative.com",
     endereco: "Área de atendimento presencial em Florianópolis e locações globais (Atendimento presencial no sul da ilha — Rio Tavares, Campeche e Novo Campeche)",
     horario: "Segunda a sexta, das 9h às 18h",
     bairros_atendidos: "Rio Tavares, Campeche, Lagoa da Conceição, Jurerê, Centro, Novo Campeche e projetos sob demanda por todo o Brasil",
@@ -382,7 +383,7 @@ export const OBN_DATA = {
     ],
     endereco: "Hub Criativo Soul in Motion (Rio Tavares, Florianópolis - SC — Atendimentos presidenciais agendados)",
     horario: "Segunda a sexta, das 9h às 18h",
-    whatsapp: "+55 (11) 99447-5111"
+    whatsapp: "+55 (11) 95648-1513"
   },
 
   faq: {

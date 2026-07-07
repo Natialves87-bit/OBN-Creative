@@ -37,7 +37,8 @@ import {
   ShoppingBag,
   Volume2,
   VolumeX,
-  Music
+  Music,
+  Mail
 } from "lucide-react";
 import { OBN_DATA, FAQItem, Service, Testimonial, CollectionItem } from "./data";
 
@@ -1220,7 +1221,7 @@ export default function App() {
               Fale conosco diretamente. Marque uma conversa profissional para definirmos a sua atração estratégica.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-md mb-12">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center items-center w-full max-w-xl mb-12">
               <a
                 href={OBN_DATA.empresa.whatsappLink}
                 target="_blank"
@@ -1229,6 +1230,14 @@ export default function App() {
               >
                 <Phone className="w-4 h-4" />
                 <span>INICIAR CONTATO</span>
+              </a>
+
+              <a
+                href={`mailto:${OBN_DATA.empresa.email}`}
+                className="w-full sm:w-auto flex-1 bg-transparent text-white border border-[#F4F1EA]/20 hover:border-[#F4F1EA]/60 hover:bg-[#F4F1EA]/5 text-center py-3.5 px-6 rounded-sm font-mono text-xs uppercase tracking-widest font-bold flex items-center justify-center gap-2 transition-all"
+              >
+                <Mail className="w-4 h-4" />
+                <span>EMAIL</span>
               </a>
 
               <a
